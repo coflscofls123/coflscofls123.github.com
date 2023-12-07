@@ -1,0 +1,286 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    <title>웹페이지 홈 화면</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* 공통 스타일 */
+        body {
+            text-align: center;
+            background-image: url('484848.jpeg'); /* 배경 이미지 추가 */
+            background-size: cover; /* 배경 이미지 크기 조절 */
+            background-position: center; /* 배경 이미지 중앙 정렬 추가 */
+            color: #fff; /* 텍스트 색상을 흰색으로 설정 */
+            padding: 20px; /* 전체 컨텐츠에 패딩 추가 */
+            margin: 0; /* 기본 본문 여백 제거 */
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3개의 열 */
+            grid-gap: 30px; /* 열 간격을 조금 늘림 */
+            justify-content: center;
+            margin-top: 30px; /* 이미지와 상단 간격 조정 */
+        }
+
+        .grid-item {
+            max-width: 100%;
+            height: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+            position: relative;
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 이미지가 깨지지 않도록 설정 */
+        }
+
+        .grid-item:hover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 2px solid #fff;
+            box-sizing: border-box;
+            opacity: 1;
+        }
+
+        .text {
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 20px; /* 위쪽 여백 조정 */
+            opacity: 0;
+            animation: scrollFadeIn 1s ease-in-out forwards;
+        }
+
+        /* 동영상 스타일 설정 */
+        .video-container {
+          
+            flex-direction: column; /* 동영상 위아래 정렬을 위한 수정 */
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .video-item {
+            width: 100%; /* 화면에 꽉 차게 */
+            max-height: auto;
+            opacity: 0;
+            animation: fadeIn 1s ease-in-out forwards;
+        }
+
+        /* 이미지 스타일 설정 */
+        .bottom-image {
+            max-width: 100%; /* 화면 너비에 맞게 조절 */
+            height: auto;
+            display: block; /* 가운데 정렬 */
+            animation: blink 2s infinite; /* 깜박거리는 애니메이션 효과 추가 */
+            opacity: 0;
+            animation: scrollFadeIn 1s ease-in-out forwards;
+        }
+
+        .moon {
+            width: auto; /* 이미지 원본 크기 유지 */
+            max-height: 270px; /* 모바일 화면에서의 최대 높이 설정 */
+            animation: blink 2s infinite; /* 깜박거리는 애니메이션 효과 추가 */
+            opacity: 0;
+            animation: scrollFadeIn 1s ease-in-out forwards;
+        }
+
+        @media (min-width: 1024px) {
+            .moon {
+                max-height: 100vh; /* 데스크톱 화면에서의 최대 높이 설정 */
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 49%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes scrollFadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 나머지 스타일은 여기에 둡니다. */
+
+        @media (min-width: 1024px) {
+            .bottom-image {
+                max-width: 100%; /* 화면 너비에 맞게 조절 */
+                height: auto; /* 이미지의 높이 자동 조정 */
+            }
+        }
+
+        .button img {
+            max-width: 100%; /* 버튼 내 이미지 화면 너비에 맞게 조절 */
+            height: auto; /* 이미지의 높이 자동 조정 */
+        }
+
+        @media (min-width: 1024px) {
+            .button img {
+                max-width: 100%; /* 버튼 내 이미지 화면 너비에 맞게 조절 */
+                height: auto; /* 이미지의 높이 자동 조정 */
+            }
+        }
+        .button {
+        background-color: black; /* 버튼 배경 색상 */
+        color: white; /* 버튼 텍스트 색상 */
+        border: 2px solid white; /* 테두리 스타일 */
+        font-weight: bold; /* 볼드 텍스트 */
+        transition: background-color 0.3s, color 0.3s; /* 변경 애니메이션 효과 */
+    }
+
+    .button:hover {
+        background-color: white; /* 버튼 배경 색상 변경 */
+        color: black; /* 버튼 텍스트 색상 변경 */
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0.3; /* 처음에 30% 투명도로 시작 */
+        }
+        50% {
+            opacity: 0.7; /* 50% 투명도로 중간에 도달 */
+        }
+        100% {
+            opacity: 1; /* 최종적으로 100% 불투명도로 나타남 */
+        }
+    }
+
+    /* 버튼 스타일 */
+    .button {
+        background-color: black;
+        color: white;
+        border: 2px solid white;
+        font-weight: bold;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .button img {
+        animation: fadeIn 3s ease-in-out infinite; /* 이미지 불투명도 애니메이션 설정 */
+        max-width: 100%;
+        height: auto;
+    }
+
+    .button:hover {
+        background-color: white;
+        color: black;
+    }
+
+
+
+    
+    </style>
+</head>
+<body>
+    <div class="back">
+        <a target="_blank" href="11index.html" style="position: relative;">
+            <img class="moon scroll-animation" src="38.jpeg" alt="달덩이">
+        </a>
+    </div>
+
+    <div class "text scroll-animation">
+        CALLERT
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-item scroll-animation">
+            <img src="28.jpeg" alt="이미지 1">
+        </div>
+        <div class="grid-item scroll-animation">
+            <img src="39.jpeg" alt="이미지 2">
+        </div>
+        <div class="grid-item scroll-animation">
+            <img src="41.jpeg" alt="이미지 3">
+        </div>
+        <div class="grid-item scroll-animation">
+            <img src="27.png" alt="이미지 4">
+        </div>
+        <div class="grid-item scroll-animation">
+            <img src="40.jpeg" alt="이미지 5">
+        </div>
+        <div class="grid-item scroll-animation">
+            <img src="43.jpeg" alt="이미지 6">
+        </div>
+    </div>
+    
+       
+            <div class="text scroll-animation">
+                One day, precious relationships come to us.
+                <div class="inner-text">Maybe it wasn't a relationship we'd already met before we met?</div>
+            </div>
+        
+            <!-- 동영상 추가 및 스타일 설정 -->
+            <div class="video-container scroll-animation">
+                <video id="myVideo" src="under water destiny.mp4" class="video-item" controls autoplay alt="동영상"></video>
+            </div>
+
+            <div class="text scroll-animation" style="margin-bottom: 5%;">
+                Maybe it wasn't a relationship we'd already met before we met?
+            </div>
+            <!-- 밑에 이미지 추가 -->
+          <!-- First button -->
+<div style="text-align: center; margin-bottom: 5%;">
+    <button type="button" class="button" >
+        <h1 class="video-title" style="margin-bottom: 5%;">Poster</h1>
+        <img src="wiwi.jpg" width="350" height="500" alt="카메라 이미지" style="margin-bottom: 5%;">
+        <p class="tag"></p>
+    </button>
+</div>
+
+<!-- Second button -->
+<div style="text-align: center; margin-bottom: 5%;">
+    <button type="button" class="button" >
+        <h1 class="video-title" style="margin-bottom: 5%;">Character1</h1>
+        <p class="tag">인간세계에서 온 소년을 만나게 된 소녀</p>
+        <img src="4848.png" width="350" height="500" alt="카메라 이미지" style="margin-bottom: 5%;">
+       
+    </button>
+</div>
+            
+            <!-- Third button -->
+            <div style="text-align: center; margin-bottom: 5%;">
+                <button type="button" class="button" >
+                    <h1 class= "video-title">Character2</h1>
+                    <p class="tag">의문의 공간에 들어와 신기한 꿈을 꾸는 소년</p>
+                    <img src="nunu.png" width="350" height="500" alt="카메라 이미지">
+                 
+                </button>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 5%;">
+                <button type="button" class="button">
+                    <h1 class= "video-title">Character3</h1>
+                    <p class="tag">꿈 속 세계에서 인연을 연결하는 운명의 신</p>
+                    <img src="nono.gif" width="350" height="500" alt="카메라 이미지">
+                    
+                </button>
+            </div>
+            
+            <!-- Continue this structure for more buttons if needed -->
+            </div>
+                </button>
+            </div>
+        </body>
+        </html>
